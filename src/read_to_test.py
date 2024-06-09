@@ -3,22 +3,21 @@ import numpy as np
 import h5py
 import helpers.data_loading_helpers as dh
 
-task = "TSR"
-
 rootdir = "/Volumes/methlab/NLP/Ce_ETH/2019/FirstLevel_V2/"
 
 
 sentences = {}
 f = h5py.File("/home/mario/Desktop/zuco-dataset-preprocessing-scripts/data/task1-NR/Matlabfiles/resultsYAC_NR.mat", 'r')
+#f = h5py.File("/home/mario/Desktop/zuco-dataset-preprocessing-scripts/data/task1-NR/Preprocessed/YAC/bip_YAC_NR5_EEG.mat", 'r')
 #f = h5py.File("/home/mario/Desktop/zuco-dataset/task1-NR/Preprocessed/YAC/bip_YAC_NR5_EEG.mat")
 #import scipy.io
 #f = scipy.io.loadmat('task1-NR/Rawdata/YDG/YDG_NR1_EEG.mat')
 
 sentence_data = f['sentenceData']
-rawData = sentence_data['rawData']
-contentData = sentence_data['content']
+rawData = sentence_data['rawData'] # Electrodes raw data
+contentData = sentence_data['content']  # sentence text
 omissionR = sentence_data['omissionRate']
-wordData = sentence_data['word']
+wordData = sentence_data['word'] # word data features
 
 # number of sentences:
 # print(len(rawData))
@@ -52,42 +51,42 @@ for idx in range(len(rawData)):
         words[word_string] = word_data[widx]
     #print(sentences)
 
-print(words)
+#print(words)
 
 
 alpha_header = ["ALPHA_EEG_" + str(i) for i in range(1224)]
-beta_header = ["BETA_EEG" + str(i) for i in range(1224)]
-gamma_header = ["GAMMA_EEG" + str(i) for i in range(1224)]
-theta_header = ["THETA_EEG" + str(i) for i in range(1224)]
-header = []
-header.extend(alpha_header)
-header.extend(beta_header)
-header.extend(gamma_header)
-header.extend(theta_header)
-header.append("FFD")
-header.append("GD")
-header.append("GPT")
-header.append("TRT")
-header.append("nFix")
-header.append("word_idx")
-header.append("word")
+# beta_header = ["BETA_EEG" + str(i) for i in range(1224)]
+# gamma_header = ["GAMMA_EEG" + str(i) for i in range(1224)]
+# theta_header = ["THETA_EEG" + str(i) for i in range(1224)]
+# header = []
+# header.extend(alpha_header)
+# header.extend(beta_header)
+# header.extend(gamma_header)
+# header.extend(theta_header)
+# header.append("FFD")
+# header.append("GD")
+# header.append("GPT")
+# header.append("TRT")
+# header.append("nFix")
+# header.append("word_idx")
+# header.append("word")
 
 rows = []
-rows.append(header)
+#rows.append(header)
 
 for word in words.keys():
     row = []
     row.extend(words[word]["ALPHA_EEG"])
-    row.extend(words[word]["BETA_EEG"])
-    row.extend(words[word]["GAMMA_EEG"])
-    row.extend(words[word]["THETA_EEG"])
-    row.append(words[word]["FFD"])
-    row.append(words[word]["GD"])
-    row.append(words[word]["GPT"])
-    row.append(words[word]["TRT"])
-    row.append(words[word]["nFix"])
-    row.append(words[word]["word_idx"])
-    row.append(words[word]["content"])
+    # row.extend(words[word]["BETA_EEG"])
+    # row.extend(words[word]["GAMMA_EEG"])
+    # row.extend(words[word]["THETA_EEG"])
+    # row.append(words[word]["FFD"])
+    # row.append(words[word]["GD"])
+    # row.append(words[word]["GPT"])
+    # row.append(words[word]["TRT"])
+    # row.append(words[word]["nFix"])
+    # row.append(words[word]["word_idx"])
+    # row.append(words[word]["content"])
     rows.append(row)
 
 print(rows)

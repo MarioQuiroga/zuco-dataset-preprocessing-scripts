@@ -24,10 +24,10 @@ Beta_trt_names = ['TRT_b1', 'TRT_b1_diff', 'TRT_b2', 'TRT_b2_diff']
 Gamma_trt_names = ['TRT_g1', 'TRT_g1_diff', 'TRT_g2', 'TRT_g2_diff']
 Theta_trt_names = ['TRT_t1', 'TRT_t1_diff', 'TRT_t2', 'TRT_t2_diff']
 # IF YOU CHANGE THOSE YOU MUST ALSO CHANGE CONSTANTS
-Alpha_features = Alpha_ffd_names + Alpha_gd_names + Alpha_gpt_names + Alpha_trt_names# + Alpha_sfd_names
-Beta_features = Beta_ffd_names + Beta_gd_names + Beta_gpt_names + Beta_trt_names# + Beta_sfd_names
-Gamma_features = Gamma_ffd_names + Gamma_gd_names + Gamma_gpt_names + Gamma_trt_names# + Gamma_sfd_names
-Theta_features = Theta_ffd_names + Theta_gd_names + Theta_gpt_names + Theta_trt_names# + Theta_sfd_names
+Alpha_features = Alpha_ffd_names #+ Alpha_gd_names + Alpha_gpt_names + Alpha_trt_names# + Alpha_sfd_names
+Beta_features = Beta_ffd_names #+ Beta_gd_names + Beta_gpt_names + Beta_trt_names# + Beta_sfd_names
+Gamma_features = Gamma_ffd_names #+ Gamma_gd_names + Gamma_gpt_names + Gamma_trt_names# + Gamma_sfd_names
+Theta_features = Theta_ffd_names #+ Theta_gd_names + Theta_gpt_names + Theta_trt_names# + Theta_sfd_names
 
 
 def extract_all_fixations(data_container, word_data_object, float_resolution = np.float16):
@@ -105,7 +105,7 @@ def extract_word_level_data(data_container, word_objects, eeg_float_resolution =
             nFixData = word_objects['nFixations']
             fixPositions = word_objects["fixPositions"]
 
-            Alpha_features_data = [word_objects[feature] for feature in Alpha_features]
+            Alpha_features_data = [word_objects[feature] for feature in Alpha_features] #[word_objects['GD_a1']] 
             Beta_features_data = [word_objects[feature] for feature in Beta_features]
             Gamma_features_data = [word_objects[feature] for feature in Gamma_features]
             Theta_features_data = [word_objects[feature] for feature in Theta_features]
@@ -158,13 +158,10 @@ def extract_word_level_data(data_container, word_objects, eeg_float_resolution =
 
                     data_dict["word_idx"] = word_idx
                     data_dict["content"] = word_string
-                    #data_dict["content1"] = data_container[word_obj[0]]
                     word_level_data[word_idx] = data_dict
                     word_idx += 1
-                    # print("word_string", word_string)
-                    # print("word_string1", data_container[word_obj[0]])
-                else:
-                    print(word_string + " is not a real word.")
+                # else:
+                #     print(word_string + " is not a real word.")
         else:
             # If there are no word-level data it will be word embeddings alone
             word_level_data = {}
