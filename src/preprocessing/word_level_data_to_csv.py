@@ -1,5 +1,4 @@
 from helpers.read_matlab_files_to_csv import *
-import os
 import h5py
 
 data_path = "/home/mario/Desktop/zuco-dataset-preprocessing-scripts/data/task1-NR/Matlabfiles/"

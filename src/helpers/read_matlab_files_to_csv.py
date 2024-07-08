@@ -30,9 +30,9 @@ def getWordLevelData(f):
 
 def get_headers_word_level_data_to_rows():
     alpha_header = ["ALPHA_EEG_" + str(i) for i in range(306)]
-    beta_header = ["BETA_EEG" + str(i) for i in range(306)]
-    gamma_header = ["GAMMA_EEG" + str(i) for i in range(306)]
-    theta_header = ["THETA_EEG" + str(i) for i in range(306)]
+    beta_header =  ["BETA_EEG_" + str(i) for i in range(306)]
+    gamma_header = ["GAMMA_EEG_" + str(i) for i in range(306)]
+    theta_header = ["THETA_EEG_" + str(i) for i in range(306)]
     header = []
     header.extend(alpha_header)
     header.extend(beta_header)
@@ -79,8 +79,8 @@ def saveCSVFile(filename, content):
         # Write the field names (column headers) to the first row of the CSV file
         csv_writer.writerows(content)
 
-def get_file_names(filename):
-    return os.listdir(filename)
+def get_file_names(folderpath : string) -> list:
+    return os.listdir(folderpath)
 
 if __name__ == "__main__":
     f = h5py.File("/home/mario/Desktop/zuco-dataset-preprocessing-scripts/data/task1-NR/Matlabfiles/resultsYAC_NR.mat", 'r')
